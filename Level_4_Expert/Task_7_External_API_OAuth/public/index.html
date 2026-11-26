@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="data:," />
+  <title>Skyline Brief &middot; Weather &amp; OAuth API Client</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div>
+        <div class="brand">Skyline Brief</div>
+        <div class="sub">External Open-Meteo API &middot; OAuth 2.0 Authorization Code Flow &middot; Rate Limiting</div>
+      </div>
+
+      <div id="authArea" class="auth-area"></div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="panel search-panel">
+      <form id="cityForm" class="search-form">
+        <input type="text" id="cityInput" value="Coimbatore" placeholder="Search any city (e.g., Coimbatore, Bengaluru, London, Tokyo)..." required />
+        <button type="submit" class="btn-primary">Fetch Forecast</button>
+      </form>
+
+      <div class="toolbar-row">
+        <div class="quick-cities">
+          <button type="button" class="city-chip" data-city="Coimbatore">Coimbatore</button>
+          <button type="button" class="city-chip" data-city="Bengaluru">Bengaluru</button>
+          <button type="button" class="city-chip" data-city="London">London</button>
+          <button type="button" class="city-chip" data-city="Tokyo">Tokyo</button>
+        </div>
+
+        <div class="diag-buttons">
+          <button type="button" id="testNotFoundBtn" class="btn-secondary">Test 404 Error</button>
+          <button type="button" id="testRateLimitBtn" class="btn-secondary">Burst Test (Trigger 429)</button>
+        </div>
+      </div>
+
+      <div class="quota-strip">
+        <div>
+          <span class="quota-label">Rate-Limit Tier:</span>
+          <strong id="tierLabel">Guest (10 req / 60s)</strong>
+        </div>
+        <div>
+          <span class="quota-label">Remaining Window:</span>
+          <strong id="remainingLabel" class="tabular">&mdash;</strong>
+        </div>
+        <div>
+          <span class="quota-label">Source / Cache:</span>
+          <strong id="sourceLabel">&mdash;</strong>
+        </div>
+      </div>
+    </section>
+
+    <div id="errorPanel" class="error-panel" hidden></div>
+
+    <section id="weatherResults" class="results-grid" hidden>
+      <div class="panel current-card">
+        <div class="loc-header">
+          <div>
+            <h1 id="locName" class="loc-name">&mdash;</h1>
+            <div id="locSub" class="sub">&mdash;</div>
+          </div>
+          <span id="condBadge" class="cond-badge">&mdash;</span>
+        </div>
+
+        <div class="temp-hero">
+          <span id="tempVal" class="temp-num tabular">&mdash;</span>
+          <span class="temp-unit">&deg;C</span>
+        </div>
+
+        <div class="metrics-mini">
+          <div><span class="sub">Feels Like</span><strong id="feelsLike">&mdash;</strong></div>
+          <div><span class="sub">Humidity</span><strong id="humidity">&mdash;</strong></div>
+          <div><span class="sub">Wind</span><strong id="windSpeed">&mdash;</strong></div>
+          <div><span class="sub">US AQI</span><strong id="usAqi">&mdash;</strong></div>
+        </div>
+      </div>
+
+      <div class="panel forecast-card">
+        <h2 class="panel-title">5-Day Forecast</h2>
+        <div id="forecastList" class="forecast-list"></div>
+      </div>
+    </section>
+  </main>
+
+  <script src="/app.js"></script>
+</body>
+</html>

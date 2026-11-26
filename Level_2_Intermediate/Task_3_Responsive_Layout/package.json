@@ -1,0 +1,12 @@
+{
+  "name": "task-3-responsive-layout",
+  "version": "1.0.0",
+  "description": "Level 2 Task 3 - Multi-section responsive design with Bootstrap 5 and advanced custom CSS animations/transitions",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}

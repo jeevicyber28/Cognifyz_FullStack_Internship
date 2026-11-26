@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="data:," />
+  <title>Studio Project Quote Intake</title>
+</head>
+<body style="margin: 0; font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background-color: #f4f1ea; color: #22262b; line-height: 1.5;">
+  <header style="background-color: #242b33; color: #f8f6f2; padding: 18px 24px; border-bottom: 3px solid #b45309;">
+    <div style="max-width: 1080px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+      <div>
+        <div style="font-size: 1.15rem; font-weight: 700; letter-spacing: 0.2px;">Kovai Dev Collective &middot; Project Intake</div>
+        <div style="font-size: 0.85rem; color: #cbd2d9;">Inline Styling, Client-Side Checks &amp; Server Validation Demo</div>
+      </div>
+      <span style="background-color: #36414d; color: #f8f6f2; font-size: 0.82rem; padding: 5px 11px; border-radius: 4px;">
+        In-Memory Records: <%= inquiries.length %>
+      </span>
+    </div>
+  </header>
+
+  <main style="max-width: 1080px; margin: 28px auto 48px; padding: 0 20px; display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start;">
+    <section style="flex: 1 1 500px; min-width: 280px; background-color: #ffffff; border: 1px solid #ddd6c9; border-radius: 6px; padding: 24px;">
+      <h1 style="margin: 0 0 6px; font-size: 1.45rem; color: #1f2429;">Request a Project Quote</h1>
+      <p style="margin: 0 0 20px; font-size: 0.92rem; color: #5b6470;">
+        Both inline browser JavaScript and the Express server validate every field before storing your inquiry.
+      </p>
+
+      <% if (statusMessage) { %>
+        <div style="background-color: #eaf6f0; border: 1px solid #9fd3b8; color: #16593f; padding: 11px 14px; border-radius: 4px; margin-bottom: 18px; font-size: 0.92rem;">
+          <%= statusMessage %>
+        </div>
+      <% } %>
+
+      <% if (Object.keys(errors).length > 0) { %>
+        <div style="background-color: #fdf2f2; border: 1px solid #e6b3b3; color: #8c2424; padding: 11px 14px; border-radius: 4px; margin-bottom: 18px; font-size: 0.92rem;">
+          <strong>Server validation rejected the submission:</strong> Please correct the highlighted fields below.
+        </div>
+      <% } %>
+
+      <div id="clientErrorBanner" style="display: none; background-color: #fff6ed; border: 1px solid #ebb88a; color: #8a3c07; padding: 11px 14px; border-radius: 4px; margin-bottom: 18px; font-size: 0.9rem;"></div>
+
+      <form id="quoteForm" action="/inquiries" method="POST" novalidate>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px;">
+          <div>
+            <label for="clientName" style="display: block; font-size: 0.86rem; font-weight: 600; margin-bottom: 5px;">Client Name</label>
+            <input
+              type="text"
+              id="clientName"
+              name="clientName"
+              value="<%= values.clientName %>"
+              placeholder="e.g., Karthik Raja"
+              style="width: 100%; box-sizing: border-box; padding: 9px 10px; border: 1px solid <%= errors.clientName ? '#c53030' : '#c6bfb2' %>; border-radius: 4px; font: inherit; font-size: 0.94rem;"
+            />
+            <% if (errors.clientName) { %>
+              <div style="color: #b91c1c; font-size: 0.8rem; margin-top: 4px;"><%= errors.clientName %></div>
+            <% } %>
+          </div>
+
+          <div>
+            <label for="email" style="display: block; font-size: 0.86rem; font-weight: 600; margin-bottom: 5px;">Work Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value="<%= values.email %>"
+              placeholder="name@company.in"
+              style="width: 100%; box-sizing: border-box; padding: 9px 10px; border: 1px solid <%= errors.email ? '#c53030' : '#c6bfb2' %>; border-radius: 4px; font: inherit; font-size: 0.94rem;"
+            />
+            <% if (errors.email) { %>
+              <div style="color: #b91c1c; font-size: 0.8rem; margin-top: 4px;"><%= errors.email %></div>
+            <% } %>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px;">
+          <div>
+            <label for="phone" style="display: block; font-size: 0.86rem; font-weight: 600; margin-bottom: 5px;">10-Digit Contact Number</label>
+            <input
+              type="text"
+              id="phone"
+              name="phone"
+              value="<%= values.phone %>"
+              placeholder="9876543210"
+              style="width: 100%; box-sizing: border-box; padding: 9px 10px; border: 1px solid <%= errors.phone ? '#c53030' : '#c6bfb2' %>; border-radius: 4px; font: inherit; font-size: 0.94rem;"
+            />
+            <% if (errors.phone) { %>
+              <div style="color: #b91c1c; font-size: 0.8rem; margin-top: 4px;"><%= errors.phone %></div>
+            <% } %>
+          </div>
+
+          <div>
+            <label for="launchDate" style="display: block; font-size: 0.86rem; font-weight: 600; margin-bottom: 5px;">Target Launch Date</label>
+            <input
+              type="date"
+              id="launchDate"
+              name="launchDate"
+              value="<%= values.launchDate %>"
+              style="width: 100%; box-sizing: border-box; padding: 8px 10px; border: 1px solid <%= errors.launchDate ? '#c53030' : '#c6bfb2' %>; border-radius: 4px; font: inherit; font-size: 0.94rem;"
+            />
+            <% if (errors.launchDate) { %>
+              <div style="color: #b91c1c; font-size: 0.8rem; margin-top: 4px;"><%= errors.launchDate %></div>
+            <% } %>
+          </div>
+        </div>
+
+        <div style="margin-bottom: 14px;">
+          <span style="display: block; font-size: 0.86rem; font-weight: 600; margin-bottom: 6px;">Engagement Type</span>
+          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <% allowedScopes.forEach(function(scopeName) { %>
+              <label style="flex: 1; min-width: 130px; display: flex; align-items: center; gap: 7px; padding: 9px 11px; border: 1px solid #c6bfb2; border-radius: 4px; background-color: #faf9f6; cursor: pointer; font-size: 0.9rem;">
+                <input
+                  type="radio"
+                  name="scope"
+                  value="<%= scopeName %>"
+                  <%= values.scope === scopeName ? 'checked' : '' %>
+                  onchange="toggleExistingUrlField()"
+                />
+                <span><%= scopeName %></span>
+              </label>
+            <% }); %>
+          </div>
+          <% if (errors.scope) { %>
+            <div style="color: #b91c1c; font-size: 0.8rem; margin-top: 4px;"><%= errors.scope %></div>
+          <% } %>
+        </div>
+
+        <div id="existingUrlRow" style="display: <%= values.scope === 'Site Redesign' ? 'block' : 'none' %>; margin-bottom: 14px; padding: 12px; background-color: #fbf8f3; border: 1px dashed #d3b896; border-radius: 4px;">
+          <label for="existingUrl" style="display: block; font-size: 0.86rem; font-weight: 600; margin-bottom: 5px;">Current Website URL (required for redesign)</label>
+          <input
+            type="url"
+            id="existingUrl"
+            name="existingUrl"
+            value="<%= values.existingUrl %>"
+            placeholder="https://your-current-site.com"
+            style="width: 100%; box-sizing: border-box; padding: 8px 10px; border: 1px solid <%= errors.existingUrl ? '#c53030' : '#c6bfb2' %>; border-radius: 4px; font: inherit; font-size: 0.93rem;"
+          />
+          <% if (errors.existingUrl) { %>
+            <div style="color: #b91c1c; font-size: 0.8rem; margin-top: 4px;"><%= errors.existingUrl %></div>
+          <% } %>
+        </div>
+
+        <div style="margin-bottom: 16px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+            <label for="budget" style="font-size: 0.86rem; font-weight: 600;">Estimated Budget</label>
+            <strong id="budgetReadout" style="font-size: 0.94rem; color: #b45309;">INR <%= Number(values.budget || 50000).toLocaleString('en-IN') %></strong>
+          </div>
+          <input
+            type="range"
+            id="budget"
+            name="budget"
+            min="10000"
+            max="250000"
+            step="5000"
+            value="<%= values.budget || 50000 %>"
+            oninput="updateBudgetReadout(this.value)"
+            style="width: 100%; accent-color: #b45309;"
+          />
+          <div style="display: flex; justify-content: space-between; font-size: 0.78rem; color: #6c737d;">
+            <span>INR 10,000</span>
+            <span>INR 2,50,000</span>
+          </div>
+          <% if (errors.budget) { %>
+            <div style="color: #b91c1c; font-size: 0.8rem; margin-top: 4px;"><%= errors.budget %></div>
+          <% } %>
+        </div>
+
+        <div style="margin-bottom: 14px;">
+          <span style="display: block; font-size: 0.86rem; font-weight: 600; margin-bottom: 6px;">Deliverables Needed</span>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+            <% allowedDeliverables.forEach(function(item) { %>
+              <label style="display: flex; align-items: center; gap: 8px; padding: 7px 10px; border: 1px solid #e2dcd0; border-radius: 4px; font-size: 0.88rem; cursor: pointer;">
+                <input
+                  type="checkbox"
+                  name="deliverables"
+                  value="<%= item %>"
+                  <%= values.deliverables.includes(item) ? 'checked' : '' %>
+                />
+                <span><%= item %></span>
+              </label>
+            <% }); %>
+          </div>
+          <% if (errors.deliverables) { %>
+            <div style="color: #b91c1c; font-size: 0.8rem; margin-top: 4px;"><%= errors.deliverables %></div>
+          <% } %>
+        </div>
+
+        <div style="margin-bottom: 14px;">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+            <label for="summary" style="font-size: 0.86rem; font-weight: 600;">Project Brief (20 - 400 chars)</label>
+            <span id="charCounter" style="font-size: 0.8rem; color: #6c737d;"><%= (values.summary || '').length %> / 400</span>
+          </div>
+          <textarea
+            id="summary"
+            name="summary"
+            rows="3"
+            oninput="updateCharCount(this.value)"
+            placeholder="Describe goals, key user workflows, or integrations needed..."
+            style="width: 100%; box-sizing: border-box; padding: 9px 10px; border: 1px solid <%= errors.summary ? '#c53030' : '#c6bfb2' %>; border-radius: 4px; font: inherit; font-size: 0.93rem;"
+          ><%= values.summary %></textarea>
+          <% if (errors.summary) { %>
+            <div style="color: #b91c1c; font-size: 0.8rem; margin-top: 4px;"><%= errors.summary %></div>
+          <% } %>
+        </div>
+
+        <div style="margin-bottom: 14px;">
+          <label style="display: flex; align-items: flex-start; gap: 8px; font-size: 0.88rem; cursor: pointer;">
+            <input type="checkbox" id="termsAccepted" name="termsAccepted" <%= values.termsAccepted ? 'checked' : '' %> style="margin-top: 3px;" />
+            <span>I confirm the project timeline and contact details above are accurate.</span>
+          </label>
+          <% if (errors.termsAccepted) { %>
+            <div style="color: #b91c1c; font-size: 0.8rem; margin-top: 4px;"><%= errors.termsAccepted %></div>
+          <% } %>
+        </div>
+
+        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; padding-top: 8px; border-top: 1px solid #ece7dd;">
+          <button
+            type="submit"
+            style="background-color: #b45309; color: #ffffff; border: none; border-radius: 4px; padding: 10px 20px; font: inherit; font-weight: 600; cursor: pointer;"
+          >
+            Submit Quote Inquiry
+          </button>
+
+          <label style="display: flex; align-items: center; gap: 6px; font-size: 0.82rem; color: #5b6470; cursor: pointer;">
+            <input type="checkbox" id="bypassClientJs" />
+            <span>Bypass inline JS check (test server validation)</span>
+          </label>
+        </div>
+      </form>
+    </section>
+
+    <aside style="flex: 1 1 320px; min-width: 280px; background-color: #ffffff; border: 1px solid #ddd6c9; border-radius: 6px; padding: 22px;">
+      <h2 style="margin: 0 0 6px; font-size: 1.15rem; color: #1f2429;">Temporary Server Storage</h2>
+      <p style="margin: 0 0 16px; font-size: 0.86rem; color: #5b6470;">
+        Validated submissions held in Express runtime memory.
+      </p>
+
+      <% if (inquiries.length === 0) { %>
+        <p style="font-size: 0.9rem; color: #6c737d;">No inquiries stored yet.</p>
+      <% } %>
+
+      <% inquiries.forEach(function(item) { %>
+        <article style="border: 1px solid #e6dfd2; border-radius: 5px; padding: 14px; margin-bottom: 12px; background-color: #fcfbf8;">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; margin-bottom: 6px;">
+            <div>
+              <strong style="font-size: 0.96rem; color: #1f2429;"><%= item.clientName %></strong>
+              <div style="font-size: 0.82rem; color: #5b6470;"><%= item.email %> &middot; <%= item.phone %></div>
+            </div>
+            <span style="background-color: #eef3f1; color: #1e6b52; font-size: 0.78rem; font-weight: 600; padding: 3px 8px; border-radius: 3px;">
+              INR <%= Number(item.budget).toLocaleString('en-IN') %>
+            </span>
+          </div>
+
+          <div style="font-size: 0.83rem; color: #414952; margin-bottom: 6px;">
+            <strong><%= item.scope %></strong> &middot; Launch: <%= item.launchDate %>
+          </div>
+
+          <p style="margin: 0 0 8px; font-size: 0.86rem; color: #2f363d;"><%= item.summary %></p>
+
+          <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap;">
+            <span style="font-size: 0.78rem; color: #6c737d;"><%= item.deliverables.join(", ") %></span>
+            <form action="/inquiries/<%= item.id %>/delete" method="POST" style="margin: 0;">
+              <button
+                type="submit"
+                style="background: none; border: 1px solid #d9c9c9; color: #8c2424; font-size: 0.76rem; padding: 3px 8px; border-radius: 3px; cursor: pointer;"
+              >
+                Remove
+              </button>
+            </form>
+          </div>
+        </article>
+      <% }); %>
+    </aside>
+  </main>
+
+  <script>
+    function updateBudgetReadout(rawValue) {
+      var num = Number(rawValue) || 0;
+      document.getElementById("budgetReadout").textContent = "INR " + num.toLocaleString("en-IN");
+    }
+
+    function updateCharCount(text) {
+      var el = document.getElementById("charCounter");
+      el.textContent = text.length + " / 400";
+      el.style.color = text.length > 400 ? "#b91c1c" : "#6c737d";
+    }
+
+    function toggleExistingUrlField() {
+      var selected = document.querySelector('input[name="scope"]:checked');
+      var row = document.getElementById("existingUrlRow");
+      row.style.display = selected && selected.value === "Site Redesign" ? "block" : "none";
+    }
+
+    document.getElementById("quoteForm").addEventListener("submit", function (event) {
+      if (document.getElementById("bypassClientJs").checked) {
+        return;
+      }
+
+      var issues = [];
+      var name = document.getElementById("clientName").value.trim();
+      var email = document.getElementById("email").value.trim();
+      var phone = document.getElementById("phone").value.replace(/[\s-]/g, "");
+      var launchDate = document.getElementById("launchDate").value;
+      var scope = document.querySelector('input[name="scope"]:checked');
+      var existingUrl = document.getElementById("existingUrl").value.trim();
+      var checkedDeliverables = document.querySelectorAll('input[name="deliverables"]:checked');
+      var summary = document.getElementById("summary").value.trim();
+      var terms = document.getElementById("termsAccepted").checked;
+
+      if (name.length < 2) issues.push("Client name must be at least 2 characters.");
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) issues.push("Enter a valid work email.");
+      if (!/^\d{10}$/.test(phone)) issues.push("Contact number must contain 10 digits.");
+      if (!launchDate) issues.push("Select a target launch date.");
+      if (scope && scope.value === "Site Redesign" && !/^https?:\/\/.+/.test(existingUrl)) {
+        issues.push("Include http:// or https:// for your current website URL.");
+      }
+      if (checkedDeliverables.length === 0) issues.push("Select at least one deliverable.");
+      if (summary.length < 20 || summary.length > 400) {
+        issues.push("Project brief should be between 20 and 400 characters.");
+      }
+      if (!terms) issues.push("Please confirm accuracy before submitting.");
+
+      var banner = document.getElementById("clientErrorBanner");
+      if (issues.length > 0) {
+        event.preventDefault();
+        banner.style.display = "block";
+        banner.innerHTML = "<strong>Client validation caught:</strong><br>" + issues.join("<br>");
+        banner.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      } else {
+        banner.style.display = "none";
+      }
+    });
+  </script>
+</body>
+</html>

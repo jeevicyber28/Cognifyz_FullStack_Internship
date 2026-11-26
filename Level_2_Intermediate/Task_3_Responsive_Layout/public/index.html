@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="data:," />
+  <title>Filter &amp; Press &mdash; Small-Batch Coffee Roastery</title>
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+    crossorigin="anonymous"
+  />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg sticky-top fp-navbar">
+    <div class="container">
+      <a class="navbar-brand fp-brand" href="#top">
+        <span class="fp-brand-mark" aria-hidden="true"></span>
+        Filter &amp; Press
+      </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#mainNav"
+        aria-controls="mainNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+          <li class="nav-item"><a class="nav-link" href="#sourcing">Sourcing</a></li>
+          <li class="nav-item"><a class="nav-link" href="#roasts">Current Roasts</a></li>
+          <li class="nav-item"><a class="nav-link" href="#brew-guide">Pour-Over Guide</a></li>
+          <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
+          <li class="nav-item ms-lg-2">
+            <a class="btn fp-btn-copper btn-sm px-3 py-2" href="#tasting">Book Cupping</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <header id="top" class="fp-hero">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-7 fp-reveal">
+          <span class="fp-eyebrow">Nilgiris &amp; Chikmagalur Micro-Lots &middot; Roasted Tuesdays</span>
+          <h1 class="fp-hero-title mt-3 mb-3">
+            Clean, traceable single-estate coffees roasted for daily brewing.
+          </h1>
+          <p class="fp-hero-lead mb-4">
+            We roast small 12 kg batches every Tuesday morning in Coimbatore, focusing on crisp acidity, balanced sweetness, and zero guesswork in your morning pour-over.
+          </p>
+          <div class="d-flex flex-wrap gap-3">
+            <a href="#roasts" class="btn fp-btn-copper px-4 py-2">Explore Seasonal Roasts</a>
+            <a href="#brew-guide" class="btn fp-btn-outline px-4 py-2">View 1:16 Brew Method</a>
+          </div>
+          <div class="row g-3 mt-4 pt-3 border-top fp-border-soft">
+            <div class="col-4">
+              <div class="fp-stat-val">1,450m</div>
+              <div class="fp-stat-label">Avg. Estate Elevation</div>
+            </div>
+            <div class="col-4">
+              <div class="fp-stat-val">48 hrs</div>
+              <div class="fp-stat-label">Roast-to-Dispatch</div>
+            </div>
+            <div class="col-4">
+              <div class="fp-stat-val">100%</div>
+              <div class="fp-stat-label">Direct Farm Lots</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-5">
+          <div class="fp-hero-panel">
+            <div class="fp-roast-card fp-roast-card-back">
+              <div class="small text-uppercase fp-muted">Batch #418 &middot; Medium-Light</div>
+              <div class="fw-semibold">Attikan Estate Washed</div>
+            </div>
+            <div class="fp-roast-card fp-roast-card-front">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <span class="fp-pill">Featured Harvest</span>
+                <span class="small fp-muted">250g Whole Bean</span>
+              </div>
+              <h2 class="h4 mb-1 fp-serif">Kotagiri Honey SLN 795</h2>
+              <p class="small fp-muted mb-3">Nilgiri Hills &middot; 1,520 masl &middot; Red Honey Process</p>
+              <div class="fp-notes-bar mb-3">
+                <span>Roasted Almond</span>
+                <span>Jaggery</span>
+                <span>Sweet Mandarin</span>
+              </div>
+              <div class="fp-curve-strip">
+                <div>
+                  <span class="d-block small fp-muted">Development</span>
+                  <strong>16.4%</strong>
+                </div>
+                <div>
+                  <span class="d-block small fp-muted">Drop Temp</span>
+                  <strong>204 &deg;C</strong>
+                </div>
+                <div>
+                  <span class="d-block small fp-muted">Recommended</span>
+                  <strong>V60 / AeroPress</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section id="sourcing" class="fp-section">
+    <div class="container">
+      <div class="row mb-4 align-items-end">
+        <div class="col-lg-7">
+          <span class="fp-eyebrow">Sourcing &amp; Craft</span>
+          <h2 class="fp-section-title mt-2">Built around transparent roast data</h2>
+        </div>
+        <div class="col-lg-5 text-lg-end">
+          <p class="fp-muted mb-0">Every bag includes harvest elevation, varietal, roast date, and water temperature targets.</p>
+        </div>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-md-4">
+          <article class="fp-feature-card h-100">
+            <div class="fp-icon-box" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M12 2L3 7l9 5 9-5-9-5z"/><path d="M3 12l9 5 9-5"/><path d="M3 17l9 5 9-5"/>
+              </svg>
+            </div>
+            <h3 class="h5 mt-3">Single-Lot Separation</h3>
+            <p class="fp-muted mb-0">Each micro-lot is cupped separately across three roast profiles before locking in the release curve.</p>
+          </article>
+        </div>
+
+        <div class="col-md-4">
+          <article class="fp-feature-card h-100">
+            <div class="fp-icon-box" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/>
+              </svg>
+            </div>
+            <h3 class="h5 mt-3">Resting Window Guidance</h3>
+            <p class="fp-muted mb-0">Light filter roasts peak between days 7 and 21 post-roast; espresso lots are rested 10 days before packing.</p>
+          </article>
+        </div>
+
+        <div class="col-md-4">
+          <article class="fp-feature-card h-100">
+            <div class="fp-icon-box" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/>
+              </svg>
+            </div>
+            <h3 class="h5 mt-3">Dialed Brew Recipes</h3>
+            <p class="fp-muted mb-0">No vague tasting jargon &mdash; straightforward grind, ratio, and pour timings tested on standard home grinders.</p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="roasts" class="fp-section fp-section-tinted">
+    <div class="container">
+      <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end gap-3 mb-4">
+        <div>
+          <span class="fp-eyebrow">Roast Catalog</span>
+          <h2 class="fp-section-title mt-2 mb-0">Freshly Roasted Bags</h2>
+        </div>
+        <div class="btn-group fp-filter-group" role="group" aria-label="Filter roasts by profile">
+          <button type="button" class="btn fp-filter-btn active" data-filter="all">All</button>
+          <button type="button" class="btn fp-filter-btn" data-filter="light">Filter Light</button>
+          <button type="button" class="btn fp-filter-btn" data-filter="medium">Balanced Medium</button>
+          <button type="button" class="btn fp-filter-btn" data-filter="espresso">Espresso</button>
+        </div>
+      </div>
+
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="roastGrid">
+        <div class="col roast-item" data-profile="light">
+          <article class="fp-product-card h-100">
+            <div class="fp-product-top">
+              <span class="fp-tag">Filter Light</span>
+              <span class="fp-price">INR 540</span>
+            </div>
+            <h3 class="h5 fp-serif mt-2">Kotagiri Red Honey</h3>
+            <p class="small fp-muted">Nilgiris &middot; SLN 795 &middot; 1,520m</p>
+            <p class="small mb-3">Bright mandarin citrus upfront with warm cane sugar finish. Clean body on paper filters.</p>
+            <div class="mt-auto d-flex justify-content-between align-items-center pt-3 border-top fp-border-soft">
+              <span class="small fp-muted">250g Bag</span>
+              <button class="btn btn-sm fp-btn-outline brew-modal-btn" data-name="Kotagiri Red Honey" data-dose="15g" data-water="240ml" data-temp="93 &deg;C" data-time="2:45">Brew Spec</button>
+            </div>
+          </article>
+        </div>
+
+        <div class="col roast-item" data-profile="medium">
+          <article class="fp-product-card h-100">
+            <div class="fp-product-top">
+              <span class="fp-tag">Balanced Medium</span>
+              <span class="fp-price">INR 490</span>
+            </div>
+            <h3 class="h5 fp-serif mt-2">Balmaadi Estate Washed</h3>
+            <p class="small fp-muted">Ooty Hills &middot; Selection 9 &middot; 1,600m</p>
+            <p class="small mb-3">Toasted hazelnut sweetness, cocoa nibs, and mild stone fruit acidity. Reliable for AeroPress and drip.</p>
+            <div class="mt-auto d-flex justify-content-between align-items-center pt-3 border-top fp-border-soft">
+              <span class="small fp-muted">250g Bag</span>
+              <button class="btn btn-sm fp-btn-outline brew-modal-btn" data-name="Balmaadi Estate Washed" data-dose="16g" data-water="250ml" data-temp="92 &deg;C" data-time="2:30">Brew Spec</button>
+            </div>
+          </article>
+        </div>
+
+        <div class="col roast-item" data-profile="espresso">
+          <article class="fp-product-card h-100">
+            <div class="fp-product-top">
+              <span class="fp-tag">Espresso</span>
+              <span class="fp-price">INR 510</span>
+            </div>
+            <h3 class="h5 fp-serif mt-2">Ratnagiri Estate Natural</h3>
+            <p class="small fp-muted">Chikmagalur &middot; Catuai &middot; 1,350m</p>
+            <p class="small mb-3">Syrupy dark chocolate body with dried fig notes. Cuts cleanly through milk or shines as a short Americano.</p>
+            <div class="mt-auto d-flex justify-content-between align-items-center pt-3 border-top fp-border-soft">
+              <span class="small fp-muted">250g Bag</span>
+              <button class="btn btn-sm fp-btn-outline brew-modal-btn" data-name="Ratnagiri Estate Natural" data-dose="18g" data-water="36g yield" data-temp="91 &deg;C" data-time="0:29">Brew Spec</button>
+            </div>
+          </article>
+        </div>
+
+        <div class="col roast-item" data-profile="light">
+          <article class="fp-product-card h-100">
+            <div class="fp-product-top">
+              <span class="fp-tag">Filter Light</span>
+              <span class="fp-price">INR 580</span>
+            </div>
+            <h3 class="h5 fp-serif mt-2">Kerehaklu Carbonic Washed</h3>
+            <p class="small fp-muted">Chikmagalur &middot; Chandragiri &middot; 1,280m</p>
+            <p class="small mb-3">White peach aroma, oolong tea clarity, and crisp finish. Best brewed slightly hotter at 94 &deg;C.</p>
+            <div class="mt-auto d-flex justify-content-between align-items-center pt-3 border-top fp-border-soft">
+              <span class="small fp-muted">250g Bag</span>
+              <button class="btn btn-sm fp-btn-outline brew-modal-btn" data-name="Kerehaklu Carbonic Washed" data-dose="15g" data-water="245ml" data-temp="94 &deg;C" data-time="2:55">Brew Spec</button>
+            </div>
+          </article>
+        </div>
+
+        <div class="col roast-item" data-profile="medium">
+          <article class="fp-product-card h-100">
+            <div class="fp-product-top">
+              <span class="fp-tag">Balanced Medium</span>
+              <span class="fp-price">INR 460</span>
+            </div>
+            <h3 class="h5 fp-serif mt-2">Yercaud Shade Roast</h3>
+            <p class="small fp-muted">Shevaroy Hills &middot; Kent &middot; 1,380m</p>
+            <p class="small mb-3">Approachable everyday cup with milk chocolate, caramel, and low bitterness. Great in French Press or Moka Pot.</p>
+            <div class="mt-auto d-flex justify-content-between align-items-center pt-3 border-top fp-border-soft">
+              <span class="small fp-muted">250g Bag</span>
+              <button class="btn btn-sm fp-btn-outline brew-modal-btn" data-name="Yercaud Shade Roast" data-dose="18g" data-water="270ml" data-temp="91 &deg;C" data-time="4:00">Brew Spec</button>
+            </div>
+          </article>
+        </div>
+
+        <div class="col roast-item" data-profile="espresso">
+          <article class="fp-product-card h-100">
+            <div class="fp-product-top">
+              <span class="fp-tag">Espresso</span>
+              <span class="fp-price">INR 480</span>
+            </div>
+            <h3 class="h5 fp-serif mt-2">South Indian House Blend</h3>
+            <p class="small fp-muted">80% Arabica / 20% Washed Robusta</p>
+            <p class="small mb-3">Dense crema, roasted walnut, and dark caramel. Built for traditional brass filter or home espresso machines.</p>
+            <div class="mt-auto d-flex justify-content-between align-items-center pt-3 border-top fp-border-soft">
+              <span class="small fp-muted">250g Bag</span>
+              <button class="btn btn-sm fp-btn-outline brew-modal-btn" data-name="South Indian House Blend" data-dose="18g" data-water="38g yield" data-temp="90 &deg;C" data-time="0:27">Brew Spec</button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="brew-guide" class="fp-section">
+    <div class="container">
+      <div class="row g-5 align-items-center">
+        <div class="col-lg-5">
+          <span class="fp-eyebrow">Standard V60 Method</span>
+          <h2 class="fp-section-title mt-2">Four-pour extraction in under three minutes</h2>
+          <p class="fp-muted mb-4">
+            We dial all filter lots to a 1:16 coffee-to-water ratio (15g medium-fine coffee to 240ml filtered water at 93 &deg;C).
+          </p>
+          <div class="fp-ratio-card">
+            <div class="d-flex justify-content-between mb-2">
+              <span class="small fp-muted">Dose</span>
+              <strong>15g Medium-Fine</strong>
+            </div>
+            <div class="d-flex justify-content-between mb-2">
+              <span class="small fp-muted">Total Water</span>
+              <strong>240ml @ 93 &deg;C</strong>
+            </div>
+            <div class="d-flex justify-content-between">
+              <span class="small fp-muted">Target Drawdown</span>
+              <strong>2:40 &ndash; 2:55</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-7">
+          <div class="fp-timeline">
+            <div class="fp-step">
+              <div class="fp-step-time">0:00</div>
+              <div>
+                <h3 class="h6 mb-1">Bloom (45ml)</h3>
+                <p class="small fp-muted mb-0">Pour 3x coffee weight evenly to saturate grounds, swirl gently, and let CO2 release until 0:40.</p>
+              </div>
+            </div>
+            <div class="fp-step">
+              <div class="fp-step-time">0:40</div>
+              <div>
+                <h3 class="h6 mb-1">First Pulse (to 130ml)</h3>
+                <p class="small fp-muted mb-0">Pour steadily in concentric circles from center outward without hitting the paper walls.</p>
+              </div>
+            </div>
+            <div class="fp-step">
+              <div class="fp-step-time">1:20</div>
+              <div>
+                <h3 class="h6 mb-1">Second Pulse (to 190ml)</h3>
+                <p class="small fp-muted mb-0">Maintain a low, steady flow rate to keep slurry temperature consistent.</p>
+              </div>
+            </div>
+            <div class="fp-step">
+              <div class="fp-step-time">1:55</div>
+              <div>
+                <h3 class="h6 mb-1">Final Pour &amp; Drawdown (to 240ml)</h3>
+                <p class="small fp-muted mb-0">Top up to 240ml, give one gentle Rao spin, and allow full drawdown onto a flat bed.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" class="fp-section fp-section-tinted">
+    <div class="container">
+      <div class="row g-5">
+        <div class="col-lg-6">
+          <span class="fp-eyebrow">Common Questions</span>
+          <h2 class="fp-section-title mt-2 mb-4">Roasting &amp; Shipping Details</h2>
+          <div class="accordion fp-accordion" id="roasteryFaq">
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faqOne">
+                  Should I buy whole beans or pre-ground?
+                </button>
+              </h2>
+              <div id="faqOne" class="accordion-collapse collapse show" data-bs-parent="#roasteryFaq">
+                <div class="accordion-body small">
+                  Whole beans retain volatile aromatics for several weeks. If you do not own a burr grinder yet, choose your exact brewer at checkout and we grind right before sealing.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqTwo">
+                  When do you roast and dispatch orders?
+                </button>
+              </h2>
+              <div id="faqTwo" class="accordion-collapse collapse" data-bs-parent="#roasteryFaq">
+                <div class="accordion-body small">
+                  Orders placed by Monday 8 PM are roasted on Tuesday morning and handed to couriers Wednesday afternoon with live tracking.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqThree">
+                  What happens at a Friday tasting session?
+                </button>
+              </h2>
+              <div id="faqThree" class="accordion-collapse collapse" data-bs-parent="#roasteryFaq">
+                <div class="accordion-body small">
+                  You taste four seasonal single-estate lots side by side, learn how grind size shifts sweetness versus bitterness, and leave with a 100g sample bag.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6" id="tasting">
+          <div class="fp-booking-box">
+            <span class="fp-eyebrow">Tasting Room</span>
+            <h2 class="h4 fp-serif mt-2 mb-1">Reserve a Friday Cupping Seat</h2>
+            <p class="small fp-muted mb-3">RS Puram Roastery Bar &middot; 4:00 PM &ndash; 5:15 PM</p>
+
+            <form id="tastingForm" class="row g-3">
+              <div class="col-sm-6">
+                <label for="bookName" class="form-label small fw-semibold">Full Name</label>
+                <input type="text" class="form-control" id="bookName" required placeholder="Divya Prabha" />
+              </div>
+              <div class="col-sm-6">
+                <label for="bookEmail" class="form-label small fw-semibold">Email</label>
+                <input type="email" class="form-control" id="bookEmail" required placeholder="divya@example.in" />
+              </div>
+              <div class="col-sm-6">
+                <label for="bookDate" class="form-label small fw-semibold">Preferred Date</label>
+                <input type="date" class="form-control" id="bookDate" required />
+              </div>
+              <div class="col-sm-6">
+                <label for="bookGuests" class="form-label small fw-semibold">Seats (1&ndash;8)</label>
+                <input type="number" class="form-control" id="bookGuests" min="1" max="8" value="2" required />
+              </div>
+              <div class="col-12">
+                <label for="bookPref" class="form-label small fw-semibold">Preferred Profile</label>
+                <select class="form-select" id="bookPref">
+                  <option value="Filter Light">Filter Light (V60 / Pour-Over)</option>
+                  <option value="Balanced Medium">Balanced Medium (AeroPress / Drip)</option>
+                  <option value="Espresso">Espresso &amp; Milk Drinks</option>
+                </select>
+              </div>
+              <div class="col-12">
+                <button type="submit" class="btn fp-btn-copper w-100 py-2">Request Tasting Slot</button>
+              </div>
+              <div class="col-12">
+                <div id="bookingFeedback" class="small"></div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="fp-footer">
+    <div class="container d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-2">
+      <div>
+        <strong class="fp-serif">Filter &amp; Press Roasters</strong>
+        <span class="small fp-footer-muted ms-2">Coimbatore, Tamil Nadu</span>
+      </div>
+      <div class="small fp-footer-muted">Level 2 Task 3 &middot; Responsive Bootstrap 5 &amp; Custom CSS Architecture</div>
+    </div>
+  </footer>
+
+  <div class="modal fade" id="brewModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content fp-modal">
+        <div class="modal-header border-bottom fp-border-soft">
+          <h3 class="modal-title h5 fp-serif" id="modalCoffeeName">Brew Recipe</h3>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row g-3 text-center">
+            <div class="col-6">
+              <div class="fp-spec-tile"><span class="d-block small fp-muted">Coffee Dose</span><strong id="modalDose"></strong></div>
+            </div>
+            <div class="col-6">
+              <div class="fp-spec-tile"><span class="d-block small fp-muted">Water / Yield</span><strong id="modalWater"></strong></div>
+            </div>
+            <div class="col-6">
+              <div class="fp-spec-tile"><span class="d-block small fp-muted">Water Temp</span><strong id="modalTemp"></strong></div>
+            </div>
+            <div class="col-6">
+              <div class="fp-spec-tile"><span class="d-block small fp-muted">Total Time</span><strong id="modalTime"></strong></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"
+  ></script>
+  <script src="/app.js"></script>
+</body>
+</html>

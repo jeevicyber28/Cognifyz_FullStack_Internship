@@ -1,0 +1,16 @@
+{
+  "name": "task-6-database-auth",
+  "version": "1.0.0",
+  "description": "Level 3 Task 6 - SQLite database integration, bcrypt/JWT authentication, and protected user-scoped API endpoints",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "cookie-parser": "^1.4.7",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.3",
+    "sql.js": "^1.13.0"
+  }
+}

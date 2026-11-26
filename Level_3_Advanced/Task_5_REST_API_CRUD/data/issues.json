@@ -1,0 +1,38 @@
+[
+  {
+    "id": "ISS-101",
+    "title": "Fix pagination offset on GET /api/orders when page=0",
+    "description": "Negative offset calculation causes empty slice when caller passes page=0 instead of defaulting to page 1.",
+    "status": "Open",
+    "priority": "High",
+    "assignee": "Deepak S",
+    "updatedAt": "2026-11-25T14:20:00.000Z"
+  },
+  {
+    "id": "ISS-102",
+    "title": "Add mobile drawer toggle for filter sidebar",
+    "description": "Filter controls stack poorly below 640px; move into a toggleable panel on small viewports.",
+    "status": "In Progress",
+    "priority": "Medium",
+    "assignee": "Aishwarya R",
+    "updatedAt": "2026-11-26T06:45:00.000Z"
+  },
+  {
+    "id": "ISS-103",
+    "title": "Validate CSV header row before importing batch records",
+    "description": "Reject malformed CSV uploads with 400 Bad Request and specify missing column names.",
+    "status": "Resolved",
+    "priority": "Low",
+    "assignee": "Praveen M",
+    "updatedAt": "2026-11-24T17:10:00.000Z"
+  },
+  {
+    "id": "ISS-104",
+    "title": "Debounce live search input on inventory table",
+    "description": "Prevent redundant API calls per keystroke by waiting 250ms before dispatching GET request.",
+    "status": "Open",
+    "priority": "Medium",
+    "assignee": "Aishwarya R",
+    "updatedAt": "2026-11-26T07:50:00.000Z"
+  }
+]

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="data:," />
+  <title>Registered Attendees</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="/">Department Tech Workshops</a>
+      <nav class="nav-links">
+        <a href="/">Register</a>
+        <a href="/attendees" class="active">Registered List</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="page-header">
+      <h1>Attendee Roster</h1>
+      <p>Showing <%= registrations.length %> registration<%= registrations.length === 1 ? '' : 's' %> rendered from the server.</p>
+    </section>
+
+    <section class="card">
+      <form class="filter-bar" method="GET" action="/attendees">
+        <label for="workshop" style="margin-bottom: 0;">Filter by session:</label>
+        <select id="workshop" name="workshop">
+          <option value="">All workshops</option>
+          <% workshops.forEach(function(item) { %>
+            <option value="<%= item.id %>" <%= activeFilter === item.id ? 'selected' : '' %>>
+              <%= item.title %>
+            </option>
+          <% }); %>
+        </select>
+        <button type="submit" class="btn-primary">Apply</button>
+        <% if (activeFilter) { %>
+          <a href="/attendees" class="btn-secondary">Reset</a>
+        <% } %>
+      </form>
+
+      <% if (registrations.length === 0) { %>
+        <p style="color: #555e58;">No attendees found for the selected workshop.</p>
+      <% } else { %>
+        <table>
+          <thead>
+            <tr>
+              <th>Pass ID</th>
+              <th>Student</th>
+              <th>Department</th>
+              <th>Workshop</th>
+              <th>Mode</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% registrations.forEach(function(item) { %>
+              <tr>
+                <td><span class="badge"><%= item.passCode %></span></td>
+                <td>
+                  <strong><%= item.fullName %></strong><br />
+                  <small style="color: #555e58;"><%= item.email %></small>
+                </td>
+                <td><%= item.department %><br /><small style="color: #555e58;"><%= item.year %></small></td>
+                <td><%= item.workshopTitle %></td>
+                <td><%= item.attendanceMode %></td>
+              </tr>
+            <% }); %>
+          </tbody>
+        </table>
+      <% } %>
+    </section>
+  </main>
+</body>
+</html>

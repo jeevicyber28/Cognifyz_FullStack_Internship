@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="data:," />
+  <title>Registration Confirmed - <%= registration.passCode %></title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="/">Department Tech Workshops</a>
+      <nav class="nav-links">
+        <a href="/">Register</a>
+        <a href="/attendees">Registered List (<%= totalRegistered %>)</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="page-header">
+      <h1>Seat Confirmed</h1>
+      <p>Your registration details below were generated server-side with EJS.</p>
+    </section>
+
+    <section class="card">
+      <span class="badge">Pass ID: <%= registration.passCode %></span>
+
+      <dl class="summary-list">
+        <dt>Attendee Name</dt>
+        <dd><%= registration.fullName %></dd>
+
+        <dt>Email Address</dt>
+        <dd><%= registration.email %></dd>
+
+        <dt>Department &amp; Year</dt>
+        <dd><%= registration.department %> &middot; <%= registration.year %></dd>
+
+        <dt>Workshop</dt>
+        <dd><%= registration.workshopTitle %></dd>
+
+        <dt>Venue / Format</dt>
+        <dd><%= registration.room %> (<%= registration.attendanceMode %>)</dd>
+
+        <dt>Notes</dt>
+        <dd><%= registration.notes %></dd>
+
+        <dt>Submitted At</dt>
+        <dd><%= registration.submittedAt %></dd>
+      </dl>
+
+      <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+        <a href="/attendees" class="btn-primary" style="text-decoration: none;">View All Attendees</a>
+        <a href="/" class="btn-secondary">Register Another Student</a>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

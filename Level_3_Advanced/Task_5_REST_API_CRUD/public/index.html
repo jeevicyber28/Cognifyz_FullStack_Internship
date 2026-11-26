@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="data:," />
+  <title>TrackDesk &middot; Issue Tracker</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div>
+        <div class="brand">TrackDesk</div>
+        <div class="subtitle">RESTful CRUD Issue Board backed by Express JSON API</div>
+      </div>
+      <button type="button" id="openCreateBtn" class="btn-primary">+ Log Issue</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="stats-grid" aria-label="Issue summary">
+      <div class="stat-card">
+        <span class="stat-label">Total Tracked</span>
+        <strong class="stat-value" id="statTotal">0</strong>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">Open</span>
+        <strong class="stat-value text-open" id="statOpen">0</strong>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">In Progress</span>
+        <strong class="stat-value text-progress" id="statProgress">0</strong>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">Resolved</span>
+        <strong class="stat-value text-done" id="statResolved">0</strong>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="toolbar">
+        <input type="search" id="searchInput" placeholder="Search by ID, title, or assignee..." />
+        <select id="statusFilter" aria-label="Filter by status">
+          <option value="All">All Statuses</option>
+          <option value="Open">Open</option>
+          <option value="In Progress">In Progress</option>
+          <option value="Resolved">Resolved</option>
+        </select>
+        <select id="priorityFilter" aria-label="Filter by priority">
+          <option value="All">All Priorities</option>
+          <option value="High">High</option>
+          <option value="Medium">Medium</option>
+          <option value="Low">Low</option>
+        </select>
+        <button type="button" id="refreshBtn" class="btn-secondary">Refresh</button>
+      </div>
+
+      <div id="issuesList" class="issues-list"></div>
+    </section>
+
+    <section class="panel api-log-panel">
+      <div class="api-log-head">
+        <strong>Recent REST API Calls</strong>
+        <span class="muted">Live client-server HTTP trace</span>
+      </div>
+      <div id="apiTrace" class="api-trace"></div>
+    </section>
+  </main>
+
+  <dialog id="issueDialog" class="modal-dialog">
+    <form id="issueForm" method="dialog">
+      <div class="modal-head">
+        <h2 id="dialogTitle">Log New Issue</h2>
+        <button type="button" id="closeDialogBtn" class="icon-close" aria-label="Close">&times;</button>
+      </div>
+
+      <input type="hidden" id="editingIssueId" />
+
+      <div class="field">
+        <label for="issueTitle">Summary Title</label>
+        <input type="text" id="issueTitle" required minlength="4" maxlength="120" placeholder="Short description of bug or task" />
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="issuePriority">Priority</label>
+          <select id="issuePriority">
+            <option value="Low">Low</option>
+            <option value="Medium" selected>Medium</option>
+            <option value="High">High</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="issueStatus">Status</label>
+          <select id="issueStatus">
+            <option value="Open" selected>Open</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Resolved">Resolved</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="issueAssignee">Assignee</label>
+        <input type="text" id="issueAssignee" placeholder="e.g., Jeevi R" />
+      </div>
+
+      <div class="field">
+        <label for="issueDesc">Details</label>
+        <textarea id="issueDesc" rows="3" placeholder="Steps to reproduce or expected outcome..."></textarea>
+      </div>
+
+      <div id="dialogError" class="dialog-error" hidden></div>
+
+      <div class="modal-actions">
+        <button type="button" id="cancelDialogBtn" class="btn-secondary">Cancel</button>
+        <button type="submit" id="saveIssueBtn" class="btn-primary">Save Issue</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+{
+  "name": "task-4-dynamic-validation-routing",
+  "version": "1.0.0",
+  "description": "Level 2 Task 4 - Complex password/form validation, dynamic DOM manipulation, and client-side History API routing",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}

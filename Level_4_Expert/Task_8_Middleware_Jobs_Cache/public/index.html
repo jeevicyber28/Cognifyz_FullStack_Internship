@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="data:," />
+  <title>DataPulse Ops &middot; Queue, Cache &amp; Middleware</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div>
+        <div class="brand">DataPulse Server Console</div>
+        <div class="sub">Request Middleware Pipeline &middot; Persistent Async Worker Queue &middot; LRU/TTL Cache</div>
+      </div>
+      <span class="env-badge">Concurrency: 2 Workers &middot; Cache TTL: 30s</span>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="grid-two">
+      <!-- Server-Side Caching Panel -->
+      <div class="panel">
+        <div class="panel-head">
+          <h2>Server-Side LRU &amp; TTL Cache</h2>
+          <button type="button" id="flushCacheBtn" class="btn-secondary">Flush Cache</button>
+        </div>
+
+        <div class="controls-row">
+          <select id="regionSelect" aria-label="Select Analytics Region">
+            <option value="South-India">South-India</option>
+            <option value="North-India">North-India</option>
+            <option value="West-India">West-India</option>
+            <option value="East-India">East-India</option>
+          </select>
+          <button type="button" id="fetchSummaryBtn" class="btn-primary">Fetch Summary</button>
+          <button type="button" id="benchmarkBtn" class="btn-secondary">Run 2x Benchmark</button>
+        </div>
+
+        <div id="cacheLastCall" class="callout" hidden></div>
+
+        <div class="kpi-grid">
+          <div class="kpi">
+            <span class="sub">Hit Rate</span>
+            <strong class="tabular" id="statHitRate">0%</strong>
+          </div>
+          <div class="kpi">
+            <span class="sub">Hits / Misses</span>
+            <strong class="tabular" id="statHitMiss">0 / 0</strong>
+          </div>
+          <div class="kpi">
+            <span class="sub">Avg HIT Time</span>
+            <strong class="tabular text-green" id="statAvgHit">0 ms</strong>
+          </div>
+          <div class="kpi">
+            <span class="sub">Avg MISS Time</span>
+            <strong class="tabular text-amber" id="statAvgMiss">0 ms</strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- Background Job Queue Panel -->
+      <div class="panel">
+        <div class="panel-head">
+          <h2>Background Job Queue</h2>
+          <span class="sub">Disk-backed async worker</span>
+        </div>
+
+        <form id="enqueueForm" class="queue-form">
+          <div class="field-row">
+            <select id="jobType" aria-label="Job Type">
+              <option value="sales-csv-export">Sales CSV Export (1,800 rows)</option>
+              <option value="log-anomaly-scan">Middleware Log Anomaly Scan</option>
+              <option value="webhook-retry-demo">Webhook Dispatch (Auto-Retry Demo)</option>
+            </select>
+            <select id="jobPriority" aria-label="Priority">
+              <option value="normal">Normal Priority</option>
+              <option value="high">High Priority</option>
+            </select>
+          </div>
+          <button type="submit" class="btn-primary">Enqueue Background Job (HTTP 202)</button>
+        </form>
+
+        <div id="jobsList" class="jobs-list"></div>
+      </div>
+    </section>
+
+    <!-- Request Middleware Logs -->
+    <section class="panel">
+      <div class="panel-head">
+        <h2>Request Processing Middleware Log (JSONL)</h2>
+        <button type="button" id="refreshLogsBtn" class="btn-secondary">Refresh Logs</button>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Request ID</th>
+              <th>Method</th>
+              <th>Endpoint</th>
+              <th>Status</th>
+              <th>Cache Header</th>
+              <th class="num">Latency</th>
+            </tr>
+          </thead>
+          <tbody id="logsRows"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="/app.js"></script>
+</body>
+</html>

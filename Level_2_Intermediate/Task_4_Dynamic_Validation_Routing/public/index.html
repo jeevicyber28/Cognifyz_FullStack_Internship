@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="data:," />
+  <title>DevPortal &middot; Account Onboarding</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header class="top-bar">
+    <div class="top-bar-inner">
+      <a href="/onboarding" class="brand" data-link>
+        <span class="brand-dot" aria-hidden="true"></span>
+        <span>Engineering Workspace</span>
+      </a>
+      <nav class="nav" aria-label="Primary navigation">
+        <a href="/onboarding" class="nav-link" data-link>Onboarding Form</a>
+        <a href="/directory" class="nav-link" data-link>Team Directory <span id="dirCountBadge" class="count-pill">3</span></a>
+        <a href="/policy" class="nav-link" data-link>Rule Sandbox</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="shell">
+    <!-- Route 1: Onboarding Form -->
+    <section id="view-onboarding" class="route-view">
+      <div class="view-head">
+        <h1>Developer Account Provisioning</h1>
+        <p>Client-side validation with live password strength analysis, dynamic skill tags, and real-time badge preview.</p>
+      </div>
+
+      <div class="split-layout">
+        <form id="onboardingForm" class="panel" novalidate>
+          <div class="field-row">
+            <div class="field">
+              <label for="fullName">Full Name</label>
+              <input type="text" id="fullName" placeholder="Sathish Kumar" autocomplete="name" />
+              <div class="field-msg" id="msg-fullName"></div>
+            </div>
+            <div class="field">
+              <label for="handle">Workspace Handle</label>
+              <input type="text" id="handle" placeholder="sathish-dev" autocomplete="username" />
+              <div class="field-msg" id="msg-handle"></div>
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="email">Work Email</label>
+              <input type="email" id="email" placeholder="sathish@company.dev" autocomplete="email" />
+              <div class="field-msg" id="msg-email"></div>
+            </div>
+            <div class="field">
+              <label for="role">Primary Role</label>
+              <select id="role">
+                <option value="">Choose role</option>
+                <option value="Full Stack Engineer">Full Stack Engineer</option>
+                <option value="Backend Developer">Backend Developer</option>
+                <option value="Frontend Engineer">Frontend Engineer</option>
+                <option value="Security Analyst">Security Analyst</option>
+              </select>
+              <div class="field-msg" id="msg-role"></div>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="githubUrl">GitHub / Portfolio URL</label>
+            <input type="url" id="githubUrl" placeholder="https://github.com/username" />
+            <div class="field-msg" id="msg-githubUrl"></div>
+          </div>
+
+          <div class="field">
+            <label for="skillInput">Core Stack Tags <span class="hint">(add 2 to 6 tags)</span></label>
+            <div class="tag-input-row">
+              <input type="text" id="skillInput" placeholder="Type a skill (e.g., PostgreSQL) and press Add" />
+              <button type="button" id="addSkillBtn" class="btn-secondary">Add</button>
+            </div>
+            <div class="quick-chips" id="quickChips">
+              <button type="button" class="chip" data-skill="Node.js">+ Node.js</button>
+              <button type="button" class="chip" data-skill="Express">+ Express</button>
+              <button type="button" class="chip" data-skill="TypeScript">+ TypeScript</button>
+              <button type="button" class="chip" data-skill="SQLite">+ SQLite</button>
+              <button type="button" class="chip" data-skill="Docker">+ Docker</button>
+            </div>
+            <div class="selected-tags" id="selectedTags"></div>
+            <div class="field-msg" id="msg-skills"></div>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="field">
+            <div class="label-between">
+              <label for="password">Account Password</label>
+              <button type="button" id="togglePwdBtn" class="text-btn">Show</button>
+            </div>
+            <input type="password" id="password" placeholder="Minimum 10 characters with mixed types" autocomplete="new-password" />
+            <div class="strength-bar-track" aria-hidden="true">
+              <div class="strength-bar-fill" id="strengthFill"></div>
+            </div>
+            <div class="strength-meta">
+              <span id="strengthLabel">Strength: Not evaluated</span>
+            </div>
+            <ul class="rule-list" id="passwordRules">
+              <li data-rule="length">At least 10 characters</li>
+              <li data-rule="upper">Contains an uppercase letter (A-Z)</li>
+              <li data-rule="lower">Contains a lowercase letter (a-z)</li>
+              <li data-rule="digit">Contains a number (0-9)</li>
+              <li data-rule="symbol">Contains a symbol (!@#$%^&amp;*)</li>
+              <li data-rule="notCommon">Does not include handle or common patterns</li>
+            </ul>
+          </div>
+
+          <div class="field">
+            <label for="confirmPassword">Confirm Password</label>
+            <input type="password" id="confirmPassword" placeholder="Re-enter password" autocomplete="new-password" />
+            <div class="field-msg" id="msg-confirmPassword"></div>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" id="createAccountBtn" class="btn-primary">Create Workspace Member</button>
+            <span id="formBanner" class="form-banner" role="status"></span>
+          </div>
+        </form>
+
+        <aside class="preview-column">
+          <div class="panel">
+            <div class="preview-caption">Live DOM Profile Preview</div>
+            <div class="member-card">
+              <div class="avatar" id="previewAvatar">?</div>
+              <div>
+                <h2 id="previewName" class="member-name">New Member</h2>
+                <div id="previewHandle" class="member-handle">@handle</div>
+              </div>
+            </div>
+            <dl class="preview-meta">
+              <dt>Role</dt>
+              <dd id="previewRole">Not selected</dd>
+              <dt>Email</dt>
+              <dd id="previewEmail">&mdash;</dd>
+              <dt>Repository</dt>
+              <dd id="previewUrl">&mdash;</dd>
+            </dl>
+            <div class="preview-tags-wrap">
+              <div class="preview-caption">Assigned Stack</div>
+              <div id="previewTags" class="tag-pills">
+                <span class="muted-note">No tags added yet</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel route-info-card">
+            <div class="preview-caption">Client-Side Router State</div>
+            <p class="small-copy">Current path: <code id="currentRouteReadout">/onboarding</code></p>
+            <p class="small-copy muted-note">Navigation uses <code>history.pushState</code> without reloading the page.</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Route 2: Team Directory -->
+    <section id="view-directory" class="route-view" hidden>
+      <div class="view-head view-head-row">
+        <div>
+          <h1>Team Directory</h1>
+          <p>Live DOM list updated directly when new members are provisioned.</p>
+        </div>
+        <a href="/onboarding" class="btn-primary" data-link>+ Provision Member</a>
+      </div>
+
+      <div class="panel">
+        <div class="toolbar">
+          <input type="search" id="dirSearch" placeholder="Filter by name, handle, or skill..." />
+          <select id="dirRoleFilter">
+            <option value="all">All Roles</option>
+            <option value="Full Stack Engineer">Full Stack Engineer</option>
+            <option value="Backend Developer">Backend Developer</option>
+            <option value="Frontend Engineer">Frontend Engineer</option>
+            <option value="Security Analyst">Security Analyst</option>
+          </select>
+        </div>
+
+        <div id="directoryGrid" class="directory-grid"></div>
+      </div>
+    </section>
+
+    <!-- Route 3: Password & Handle Sandbox -->
+    <section id="view-policy" class="route-view" hidden>
+      <div class="view-head">
+        <h1>Validation Policy Sandbox</h1>
+        <p>Test candidate passwords and handles directly against the client-side validation rules.</p>
+      </div>
+
+      <div class="panel sandbox-panel">
+        <div class="field">
+          <label for="sandboxHandle">Test Handle Availability &amp; Format</label>
+          <input type="text" id="sandboxHandle" placeholder="Try 'admin', 'root', or 'priya-k'" />
+          <div id="sandboxHandleResult" class="field-msg"></div>
+        </div>
+        <div class="field">
+          <label for="sandboxPwd">Test Password Complexity</label>
+          <input type="text" id="sandboxPwd" placeholder="Type any password string to inspect score..." />
+          <div id="sandboxPwdScore" class="sandbox-score"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="/app.js"></script>
+</body>
+</html>

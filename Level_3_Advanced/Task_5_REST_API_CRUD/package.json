@@ -1,0 +1,12 @@
+{
+  "name": "task-5-rest-api-crud",
+  "version": "1.0.0",
+  "description": "Level 3 Task 5 - RESTful CRUD API with JSON persistence and Fetch front-end client",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}

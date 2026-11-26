@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="data:," />
+  <title>Workshop Registration Desk</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="/">Department Tech Workshops</a>
+      <nav class="nav-links">
+        <a href="/" class="active">Register</a>
+        <a href="/attendees">Registered List (<%= totalRegistered %>)</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="page-header">
+      <h1>Weekend Technical Workshop RSVP</h1>
+      <p>Reserve a seat for upcoming campus engineering sessions. Confirmation is rendered directly by the Express server.</p>
+    </section>
+
+    <section class="card">
+      <% if (error) { %>
+        <div class="alert-error" role="alert"><%= error %></div>
+      <% } %>
+
+      <form action="/register" method="POST">
+        <fieldset>
+          <legend>Student Details</legend>
+          <div class="form-grid">
+            <div class="field">
+              <label for="fullName">Full Name</label>
+              <input
+                type="text"
+                id="fullName"
+                name="fullName"
+                placeholder="e.g., Kavya Narayanan"
+                value="<%= values.fullName || '' %>"
+                required
+              />
+            </div>
+            <div class="field">
+              <label for="email">College Email</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="name@college.edu"
+                value="<%= values.email || '' %>"
+                required
+              />
+            </div>
+            <div class="field">
+              <label for="department">Department</label>
+              <select id="department" name="department" required>
+                <option value="">Select department</option>
+                <option value="Computer Science" <%= values.department === 'Computer Science' ? 'selected' : '' %>>Computer Science</option>
+                <option value="Information Technology" <%= values.department === 'Information Technology' ? 'selected' : '' %>>Information Technology</option>
+                <option value="Electronics & Communication" <%= values.department === 'Electronics & Communication' ? 'selected' : '' %>>Electronics &amp; Communication</option>
+                <option value="Mechanical Engineering" <%= values.department === 'Mechanical Engineering' ? 'selected' : '' %>>Mechanical Engineering</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="year">Academic Year</label>
+              <select id="year" name="year" required>
+                <option value="">Select year</option>
+                <option value="1st Year" <%= values.year === '1st Year' ? 'selected' : '' %>>1st Year</option>
+                <option value="2nd Year" <%= values.year === '2nd Year' ? 'selected' : '' %>>2nd Year</option>
+                <option value="3rd Year" <%= values.year === '3rd Year' ? 'selected' : '' %>>3rd Year</option>
+                <option value="4th Year" <%= values.year === '4th Year' ? 'selected' : '' %>>4th Year</option>
+              </select>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Session Selection</legend>
+          <div class="field">
+            <label for="workshopId">Choose Workshop</label>
+            <select id="workshopId" name="workshopId" required>
+              <option value="">Select a session</option>
+              <% workshops.forEach(function(item) { %>
+                <option value="<%= item.id %>" <%= values.workshopId === item.id ? 'selected' : '' %>>
+                  <%= item.title %> (<%= item.room %> - <%= item.seats %> seats)
+                </option>
+              <% }); %>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>Attendance Preference</label>
+            <div class="radio-row">
+              <label class="radio-option">
+                <input type="radio" name="attendanceMode" value="In-person" <%= (!values.attendanceMode || values.attendanceMode === 'In-person') ? 'checked' : '' %> />
+                In-person (Campus Lab)
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="attendanceMode" value="Live Stream" <%= values.attendanceMode === 'Live Stream' ? 'checked' : '' %> />
+                Live Stream Link
+              </label>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="notes">Topics or Questions (optional)</label>
+            <textarea id="notes" name="notes" rows="3" placeholder="Any specific questions you want covered during Q&amp;A..."><%= values.notes || '' %></textarea>
+          </div>
+        </fieldset>
+
+        <button type="submit" class="btn-primary">Confirm Seat Registration</button>
+      </form>
+    </section>
+  </main>
+</body>
+</html>

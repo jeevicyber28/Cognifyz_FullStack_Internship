@@ -1,0 +1,6 @@
+node_modules/
+.env
+*.sqlite
+logs/
+storage/
+Level_4_Expert/Task_8_Middleware_Jobs_Cache/data/

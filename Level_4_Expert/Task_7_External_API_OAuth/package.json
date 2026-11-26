@@ -1,0 +1,14 @@
+{
+  "name": "task-7-external-api-oauth",
+  "version": "1.0.0",
+  "description": "Level 4 Task 7 - OAuth 2.0 authorization code flow, Open-Meteo external API integration, sliding-window rate limiting, and structured error handling",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2"
+  }
+}

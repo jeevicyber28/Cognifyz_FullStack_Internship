@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="data:," />
+  <title>PocketLedger &middot; Personal Expense Book</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand-wrap">
+        <span class="brand">PocketLedger</span>
+        <span class="sub">SQLite Storage &amp; JWT Cookie Authentication</span>
+      </div>
+      <div id="userControls" class="user-controls" hidden>
+        <span class="user-badge" id="currentUserLabel"></span>
+        <button type="button" id="logoutBtn" class="btn-secondary">Sign Out</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Auth Panel -->
+    <section id="authSection" class="auth-wrap">
+      <div class="panel auth-card">
+        <div class="tab-bar">
+          <button type="button" class="tab-btn active" data-tab="login">Sign In</button>
+          <button type="button" class="tab-btn" data-tab="register">Create Account</button>
+        </div>
+
+        <form id="loginForm">
+          <div class="field">
+            <label for="loginEmail">Email</label>
+            <input type="email" id="loginEmail" required placeholder="karthik@ledger.local" />
+          </div>
+          <div class="field">
+            <label for="loginPassword">Password</label>
+            <input type="password" id="loginPassword" required placeholder="Enter password" />
+          </div>
+          <div id="loginError" class="error-box" hidden></div>
+          <button type="submit" class="btn-primary full-width">Sign In to Ledger</button>
+
+          <div class="demo-box">
+            <div class="demo-title">Seeded Demo Accounts (SQLite)</div>
+            <div class="demo-actions">
+              <button type="button" class="btn-chip" data-email="karthik@ledger.local" data-pass="Ledger#2026">Use Karthik (5 entries)</button>
+              <button type="button" class="btn-chip" data-email="priya@ledger.local" data-pass="Ledger#2026">Use Priya (2 entries)</button>
+            </div>
+          </div>
+        </form>
+
+        <form id="registerForm" hidden>
+          <div class="field">
+            <label for="regName">Full Name</label>
+            <input type="text" id="regName" required placeholder="Aravindhan M" />
+          </div>
+          <div class="field">
+            <label for="regEmail">Email</label>
+            <input type="email" id="regEmail" required placeholder="aravind@example.in" />
+          </div>
+          <div class="field">
+            <label for="regPassword">Password (min 8 chars)</label>
+            <input type="password" id="regPassword" required minlength="8" placeholder="Create a strong password" />
+          </div>
+          <div id="regError" class="error-box" hidden></div>
+          <button type="submit" class="btn-primary full-width">Create Account</button>
+        </form>
+
+        <div class="auth-probe">
+          <button type="button" id="probeAuthBtn" class="btn-link">Test Unauthenticated GET /api/expenses</button>
+          <div id="probeOutput" class="probe-output" hidden></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Authenticated Ledger Dashboard -->
+    <section id="appSection" hidden>
+      <div class="summary-row">
+        <div class="panel metric">
+          <span class="metric-label">Total Recorded Spend</span>
+          <strong class="metric-value tabular" id="totalSpend">INR 0</strong>
+        </div>
+        <div class="panel metric">
+          <span class="metric-label">Ledger Entries</span>
+          <strong class="metric-value tabular" id="entryCount">0</strong>
+        </div>
+        <div class="panel metric">
+          <span class="metric-label">Top Category</span>
+          <strong class="metric-value" id="topCategory">&mdash;</strong>
+        </div>
+      </div>
+
+      <div class="ledger-grid">
+        <div class="left-stack">
+          <div class="panel">
+            <h2 class="panel-title">Record Expense</h2>
+            <form id="expenseForm">
+              <input type="hidden" id="editingId" />
+              <div class="field">
+                <label for="expTitle">Description</label>
+                <input type="text" id="expTitle" required placeholder="e.g., AWS Lightsail Instance" />
+              </div>
+              <div class="field-row">
+                <div class="field">
+                  <label for="expCategory">Category</label>
+                  <select id="expCategory">
+                    <option value="Food & Dining">Food &amp; Dining</option>
+                    <option value="Transport">Transport</option>
+                    <option value="Cloud & Tools">Cloud &amp; Tools</option>
+                    <option value="Utilities">Utilities</option>
+                    <option value="Learning">Learning</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="expAmount">Amount (INR)</label>
+                  <input type="number" id="expAmount" step="0.01" min="1" required placeholder="450" />
+                </div>
+              </div>
+              <div class="field">
+                <label for="expDate">Date</label>
+                <input type="date" id="expDate" required />
+              </div>
+              <div class="field">
+                <label for="expNote">Note (optional)</label>
+                <input type="text" id="expNote" placeholder="Receipt ref or context" />
+              </div>
+              <div id="expError" class="error-box" hidden></div>
+              <div class="form-btns">
+                <button type="submit" id="saveExpBtn" class="btn-primary">Add Entry</button>
+                <button type="button" id="cancelEditBtn" class="btn-secondary" hidden>Cancel Edit</button>
+              </div>
+            </form>
+          </div>
+
+          <div class="panel">
+            <h2 class="panel-title">Category Breakdown (SQLite GROUP BY)</h2>
+            <div id="breakdownList" class="breakdown-list"></div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="table-toolbar">
+            <h2 class="panel-title" style="margin: 0;">Your Entries</h2>
+            <div class="filter-controls">
+              <input type="search" id="filterSearch" placeholder="Search notes or title..." />
+              <select id="filterCategory">
+                <option value="All">All Categories</option>
+                <option value="Food & Dining">Food &amp; Dining</option>
+                <option value="Transport">Transport</option>
+                <option value="Cloud & Tools">Cloud &amp; Tools</option>
+                <option value="Utilities">Utilities</option>
+                <option value="Learning">Learning</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Item</th>
+                  <th>Category</th>
+                  <th class="num">Amount</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="expenseRows"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="/app.js"></script>
+</body>
+</html>
