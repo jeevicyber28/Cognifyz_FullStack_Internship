@@ -1,0 +1,9 @@
+{
+  "name": "cognifyz-fullstack-internship",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Integration test harness and helper scripts for all 8 Cognifyz Full Stack Internship tasks",
+  "scripts": {
+    "test": "node --test tests/integration.test.mjs"
+  }
+}
