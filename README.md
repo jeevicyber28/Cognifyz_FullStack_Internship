@@ -257,6 +257,20 @@ Each task runs on its own port (`3001` through `3008`), so multiple apps can run
 
 ---
 
+## Automated Integration Tests
+
+Run the full-stack integration test suite across all 8 servers (requires dependencies installed per task folder):
+
+```bash
+npm test
+# or directly with Node:
+node --test tests/integration.test.mjs
+```
+
+The test harness in [`tests/integration.test.mjs`](tests/integration.test.mjs) boots all 8 servers and verifies SSR rendering, form validation, REST CRUD, SQLite authorization isolation, OAuth 2.0 code exchange, rate limiting, and LRU caching.
+
+---
+
 ## Author & Submission Details
 
 - **Intern:** Jeeviraj V
